@@ -1,0 +1,2 @@
+funBoolean = require('../src')
+

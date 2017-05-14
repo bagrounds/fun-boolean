@@ -5,45 +5,149 @@
 ;(function () {
   'use strict'
 
-  /* exports */
-  module.exports = funBoolean
-  module.exports.and = and
-  module.exports.or = or
-  module.exports.not = not
-  module.exports.xor = xor
-  module.exports.xnor = xnor
-  module.exports.yes = yes
-  module.exports.no = no
+  /* imports */
+  var curry = require('fun-curry')
+  var guarded = require('guarded')
 
-  function funBoolean (anything) {
+  var boolsToBool = guarded(allBools, isBoolean)
+
+  function allBools (array) {
+    return array.reduce(function (result, element) {
+      return result && isBoolean(element)
+    }, true)
+  }
+
+  /* exports */
+  module.exports = {
+    and: curry(boolsToBool(and)),
+    or: curry(boolsToBool(or)),
+    not: boolsToBool(not),
+    xor: curry(boolsToBool(xor)),
+    t: t,
+    f: f,
+    truthy: truthy,
+    falsey: falsey,
+    isBoolean: isBoolean,
+    equal: curry(boolsToBool(equal))
+  }
+
+  /**
+   *
+   * @function module:fun-boolean.falsey
+   *
+   * @param {*} anything - to check
+   *
+   * @return {Boolean} if anything is falsey
+   */
+  function falsey (anything) {
+    return !anything
+  }
+
+  /**
+   *
+   * @function module:fun-boolean.truthy
+   *
+   * @param {*} anything - to check
+   *
+   * @return {Boolean} if anything is truthy
+   */
+  function truthy (anything) {
     return !!anything
   }
 
+  /**
+   *
+   * @function module:fun-boolean.isBoolean
+   *
+   * @param {*} anything - to check
+   *
+   * @return {Boolean} if anything is a Boolean
+   */
+  function isBoolean (anything) {
+    return typeof anything === 'boolean'
+  }
+
+  /**
+   *
+   * @function module:fun-boolean.and
+   *
+   * @param {Boolean} a - input
+   * @param {Boolean} b - input
+   *
+   * @return {Boolean} a && b
+   */
   function and (a, b) {
     return a && b
   }
 
+  /**
+   *
+   * @function module:fun-boolean.or
+   *
+   * @param {Boolean} a - input
+   * @param {Boolean} b - input
+   *
+   * @return {Boolean} a || b
+   */
   function or (a, b) {
     return a || b
   }
 
+  /**
+   *
+   * @function module:fun-boolean.not
+   *
+   * @param {Boolean} b - input
+   *
+   * @return {Boolean} !b
+   */
   function not (b) {
     return !b
   }
 
+  /**
+   *
+   * @function module:fun-boolean.xor
+   *
+   * @param {Boolean} a - input
+   * @param {Boolean} b - input
+   *
+   * @return {Boolean} a !== b
+   */
   function xor (a, b) {
     return a !== b
   }
 
-  function xnor (a, b) {
+  /**
+   *
+   * @function module:fun-boolean.equal
+   *
+   * @param {Boolean} a - input
+   * @param {Boolean} b - input
+   *
+   * @return {Boolean} a === b
+   */
+  function equal (a, b) {
     return a === b
   }
 
-  function yes () {
+  /**
+   *
+   * @function module:fun-boolean.t
+   *
+   * @return {Boolean} true
+   */
+  function t () {
     return true
   }
 
-  function no () {
+  /**
+   *
+   * @function module:fun-boolean.t
+   *
+   * @return {Boolean} false
+   */
+  function f () {
     return false
   }
 })()
