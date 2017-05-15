@@ -1,4 +1,6 @@
 /**
+ * Functions for working with Booleans.
+ * Functions with multiple arguments are curried.
  *
  * @module fun-boolean
  */
@@ -106,6 +108,7 @@
   }
 
   /**
+   * Exclusive or. Returns true if a or b is true, but not both.
    *
    * @function module:fun-boolean.xor
    *
@@ -119,6 +122,7 @@
   }
 
   /**
+   * aka xnor
    *
    * @function module:fun-boolean.equal
    *
@@ -132,6 +136,7 @@
   }
 
   /**
+   * Always returns true
    *
    * @function module:fun-boolean.t
    *
@@ -142,8 +147,9 @@
   }
 
   /**
+   * Always returns false
    *
-   * @function module:fun-boolean.t
+   * @function module:fun-boolean.f
    *
    * @return {Boolean} false
    */
