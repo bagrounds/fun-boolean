@@ -12,6 +12,11 @@
   var guarded = require('guarded')
 
   var boolsToBool = guarded(allBools, isBoolean)
+  var boolArrayToBool = guarded(isBoolArray, isBoolean)
+
+  function isBoolArray (array) {
+    return array[0].map(isBoolean).reduce(and, true)
+  }
 
   function allBools (array) {
     return array.reduce(function (result, element) {
@@ -31,9 +36,9 @@
     falsey: falsey,
     isBoolean: isBoolean,
     equal: curry(boolsToBool(equal)),
-    all: all,
-    any: any,
-    none: none
+    all: boolArrayToBool(all),
+    any: boolArrayToBool(any),
+    none: boolArrayToBool(none)
   }
 
   /**
