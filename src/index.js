@@ -30,7 +30,46 @@
     truthy: truthy,
     falsey: falsey,
     isBoolean: isBoolean,
-    equal: curry(boolsToBool(equal))
+    equal: curry(boolsToBool(equal)),
+    all: all,
+    any: any,
+    none: none
+  }
+
+  /**
+   *
+   * @function module:fun-boolean.none
+   *
+   * @param {Array<Boolean>} bools - to check
+   *
+   * @return {Boolean} if no bools are true
+   */
+  function none (bools) {
+    return all(bools.map(not))
+  }
+
+  /**
+   *
+   * @function module:fun-boolean.any
+   *
+   * @param {Array<Boolean>} bools - to check
+   *
+   * @return {Boolean} if any bools are true
+   */
+  function any (bools) {
+    return bools.reduce(or, false)
+  }
+
+  /**
+   *
+   * @function module:fun-boolean.all
+   *
+   * @param {Array<Boolean>} bools - to check
+   *
+   * @return {Boolean} if all bools are true
+   */
+  function all (bools) {
+    return bools.reduce(and, true)
   }
 
   /**

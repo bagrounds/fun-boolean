@@ -8,6 +8,18 @@
   var arrange = require('fun-arrange')
 
   var equalityTests = [
+    [[[false, false]], true, 'none'],
+    [[[false, true]], false, 'none'],
+    [[[true, false]], false, 'none'],
+    [[[true, true]], false, 'none'],
+    [[[false, false]], false, 'any'],
+    [[[false, true]], true, 'any'],
+    [[[true, false]], true, 'any'],
+    [[[true, true]], true, 'any'],
+    [[[false, false]], false, 'all'],
+    [[[false, true]], false, 'all'],
+    [[[true, false]], false, 'all'],
+    [[[true, true]], true, 'all'],
     [[undefined], true, 'falsey'],
     [[null], true, 'falsey'],
     [[{}], true, 'truthy'],
